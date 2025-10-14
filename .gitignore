@@ -1,95 +1,72 @@
-# Esta é a lista padrão que garante que não enviemos arquivos desnecessários para o GitHub.
-# Arquivos DLL compilados/otimizados em bytes
+# Regras Globais e de Sistema Operacional
+.DS_Store
+*.pem
+
+# Regras de Backend (Python/Poetry)
+
+# Ambientes Virtuais e Dependências
+.venv
+venv/
+env/
+
+# Arquivos de cache e compilados do Python
 __pycache__/
 *.py[cod]
 *$py.class
 
-# Extensões C
-*.so
-
-# Distribuição / embalagem
-.Python
+# Distribution / packaging (gerado pelo 'poetry build')
 build/
-develop-eggs/
 dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
 *.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
 
-# PyInstaller
-#  Normalmente esses arquivos são escritos por um script python a partir de um modelo
-#  antes que o PyInstaller crie o exe, para injetar data/outras informações nele.
-*.manifest
-*.spec
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Teste de unidade / relatórios de cobertura
-htmlcov/
-.tox/
-.nox/
+# Relatórios de Teste e Cobertura
 .coverage
 .coverage.*
 .cache
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
-.pytest_cache/
+htmlcov/
 
-# Traduções
-*.mo
-*.pot
+# =================================================================
+# Regras de Frontend (Next.js/Node.js)
+# =================================================================
+# Dependências (a pasta mais importante a ser ignorada)
+frontend/node_modules/
 
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
+# Logs de depuração
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
 
-# Flask stuff:
-instance/
-.webassets-cache
+# Arquivos de Build e Produção do Next.js
+frontend/.next/
+frontend/out/
+frontend/build/
 
-# Scrapy stuff:
-.scrapy
+# Arquivos de cache do TypeScript
+frontend/*.tsbuildinfo
+frontend/next-env.d.ts
 
-# Sphinx documentation
-docs/_build/
+# Arquivos de cobertura de testes do frontend
+frontend/coverage/
 
-# Jupyter Notebook
-.ipynb_checkpoints
+# Vercel (Plataforma de deploy do frontend)
+frontend/.vercel/
 
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
+# Regras para outros gerenciadores de pacotes
+frontend/.pnp
+frontend/.pnp.*
 
-# Arquivos específicos do IDE/Editor
+# =================================================================
+# Regras de IDEs e Ferramentas de Desenvolvimento
+# =================================================================
+# Arquivos de configuração específicos do VSCode
 .vscode/
-.idea/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
 
-# Frontend (Next.js)
-frontend/node_modules
-frontend/.next
-frontend/out
+# Arquivos de configuração de outras IDEs
+.idea/
+
+# Regras de Segurança (AS MAIS IMPORTANTES)
+
+# Nunca envie arquivos de variáveis de ambiente para o repositório
+.env
+.env*
