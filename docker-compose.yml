@@ -1,5 +1,3 @@
-version: '3.8'
-
 # Define todos os serviços (contêineres) que compõem nossa aplicação.
 services:
   # O serviço do nosso backend em Python.
