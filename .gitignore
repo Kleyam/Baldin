@@ -70,3 +70,6 @@ frontend/.pnp.*
 # Nunca envie arquivos de variáveis de ambiente para o repositório
 .env
 .env*
+
+# Exceto o nosso arquivo de exemplo, que é seguro
+!.env.example
