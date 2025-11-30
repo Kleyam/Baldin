@@ -1,53 +1,44 @@
-# Define todos os serviços (contêineres) que compõem nossa aplicação.
+# docker-compose.yml - VERSÃO CORRIGIDA
 services:
-  # O serviço do nosso backend em Python.
   backend:
-    # A instrução 'build' diz ao Docker Compose para construir uma imagem.
     build:
-      # 'context' aponta para a pasta onde o Dockerfile e o código estão.
       context: ./backend
-    # Mapeia a porta 8000 do nosso computador (host) para a porta 8000 do contêiner.
-    # É assim que conseguiremos acessar nossa API pelo navegador em http://localhost:8000
     ports:
       - "8000:8000"
-    # Monta volumes. Essencial para o desenvolvimento!
     volumes:
-      # Sincroniza a pasta 'backend' do nosso computador com a pasta '/app' dentro do contêiner.
-      # Qualquer alteração que você salvar no código localmente será refletida instantaneamente
-      # dentro do contêiner, sem precisar reconstruir a imagem.
       - ./backend:/app
-    # Define as variáveis de ambiente que estarão disponíveis para a nossa aplicação.
-    # O valor ${...} será lido de um arquivo .env que criaremos a seguir.
     environment:
       - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
-    # Define a dependência de serviços. O 'backend' só iniciará depois que o serviço 'db'
-    # estiver pronto e saudável, evitando erros de conexão com o banco de dados.
     depends_on:
-      - db
+      db:
+        condition: service_healthy  # ✅ Aguarda health check
+    restart: unless-stopped  # ✅ Reinicia automaticamente em caso de falha
+    networks:
+      - baldin-network
 
-  # O serviço do nosso banco de dados PostgreSQL.
   db:
-    # Usa uma imagem oficial e pronta do PostgreSQL do Docker Hub.
-    # A tag '15-alpine' é uma versão específica e leve.
     image: postgres:15-alpine
-    # Monta um volume para persistir os dados do banco de dados.
     volumes:
-      # 'postgres_data' é um volume nomeado gerenciado pelo Docker.
-      # Isso garante que, mesmo se removermos o contêiner, nossos dados (usuários, vagas, etc.)
-      # não serão perdidos.
       - postgres_data:/var/lib/postgresql/data/
-    # As variáveis de ambiente usadas pela imagem do Postgres para a configuração inicial.
-    # Elas criarão o banco de dados, o usuário e a senha na primeira vez que o contêiner subir.
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
     ports:
-      # Mapeia a porta 5433 do nosso computador para a porta 5432 do contêiner.
-      # Usamos 5433 para evitar conflitos caso você já tenha o Postgres instalado localmente.
-      # Isso é útil para conectar ferramentas de gerenciamento de banco de dados.
       - "5433:5432"
+    restart: unless-stopped
+    healthcheck:  # ✅ Health check do PostgreSQL
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+    networks:
+      - baldin-network
 
-# Define os volumes nomeados que declaramos nos serviços.
 volumes:
   postgres_data:
+
+networks:  # Rede isolada
+  baldin-network:
+    driver: bridge

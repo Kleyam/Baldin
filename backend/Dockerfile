@@ -1,27 +1,24 @@
-# A tag "slim" significa que é uma versão mais leve, otimizada para produção.
 FROM python:3.13-slim
 
-# Passo 2: Define o diretório de trabalho dentro do contêiner.
-# Todos os comandos a seguir serão executados a partir daqui.
-WORKDIR /app
+# Instalar Poetry
+RUN pip install --no-cache-dir poetry==1.8.2
 
-RUN pip install poetry
+# Copiar APENAS arquivos de dependência
+COPY pyproject.toml poetry.lock ./
 
-# Passo 4: Copia os arquivos de dependência para o contêiner.
-# Copiamos estes arquivos primeiro para aproveitar o cache do Docker.
-# Se as dependências não mudarem, o Docker não precisará reinstalá-las toda vez.
-COPY pyproject.toml poetry.lock* ./
+# Instalando dependências (sem criar virtualenv no container)
+RUN poetry config virtualenvs.create false \
+    && poetry install --only main --no-interaction --no-ansi
 
-# Passo 5: Instala as dependências do projeto usando Poetry.
-# - "config virtualenvs.create false" diz ao Poetry para instalar no ambiente do sistema,
-#   já que já estamos isolados dentro de um contêiner.
-# - "poetry install" instala as dependências do pyproject.toml.
-RUN poetry config virtualenvs.create false && poetry install --no-root --no-interaction --no-ansi
+# Copiar código da aplicação 
+COPY --chown=nobody:nogroup src/ ./src/
 
-# Passo 6: Copia o código-fonte da nossa aplicação (a pasta src) para o contêiner.
-COPY src/ ./src/
+# Usuário não-root para segurança
+USER nobody
 
-# Passo 7: Define o comando que será executado quando o contêiner iniciar.
-# ATENÇÃO: Este comando falhará se tentarmos rodar agora, pois ainda não criamos
-# o arquivo src/main.py. Faremos isso em breve.
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Health check usando biblioteca nativa do Python (mais leve e seguro)
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/health').read()"
+
+# Comando otimizado para produção
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4", "--log-level", "info"]

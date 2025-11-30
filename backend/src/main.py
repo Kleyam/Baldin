@@ -7,3 +7,8 @@ app = FastAPI()
 # Passo 4: Definir a função que executa e retorna os dados
 def read_root():
     return {"message": "Bem-vindo à API do Baldin!"}
+
+@app.get("/health")
+def health_check():
+    return{"status": "ok"}
+
