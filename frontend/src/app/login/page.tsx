@@ -1,7 +1,7 @@
 import MainComponent from "@/components/mainComponent";
-import CardLogin from "@/components/cardLogin";
+import CardLogin from "@/components/cardLoginComponent";
 import Img from "@/components/ui/img";
-import FormLogin from "@/components/formLogin";
+import FormLogin from "@/components/formLoginComponent";
 
 function LoginPage() {
     const mainProps = {

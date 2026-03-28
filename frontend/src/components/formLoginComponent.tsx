@@ -1,6 +1,8 @@
 "use client";
 import EmailSVGComponent from "./svg/emailSVGComponent";
 import SenhaSVGComponent from "./svg/senhaSVGComponent";
+import Button from "./ui/button";
+import Paragrafo from "./ui/paragrafo";
 import Link from "next/link";
 
 function FormLogin() {
@@ -27,8 +29,10 @@ function FormLogin() {
                 </div>
                 <a href="/" className="text-fuchsia-700 hover:underline">Esqueci minha senha</a>
             </div>
-            <button style={{ background: "linear-gradient(to right, #8338ec, #ff006e)" }} type="submit" className="text-white rounded-lg p-4 w-full focus:outline-none hover:scale-101 transition-all duration-300 cursor-pointer">Login</button>
-            <p className="text-center text-gray-500 mt-2">Não tem uma conta? <a href="/cadastro" className="text-fuchsia-700 hover:underline">Registre-se</a></p>
+            <Button buttonText="Login" className="text-white rounded-lg p-4 w-full focus:outline-none hover:scale-101 transition-all duration-300 cursor-pointer" type="submit" style={{ background: "linear-gradient(to right, #8338ec, #ff006e)" }} />
+            <Paragrafo text="Não tem uma conta? " className="text-center text-gray-500 mt-2">
+                <a href="/cadastro" className="text-fuchsia-700 hover:underline">Registre-se</a>
+            </Paragrafo>
         </form>
     );
 }
