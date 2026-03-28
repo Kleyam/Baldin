@@ -18,7 +18,7 @@ function FormLogin() {
                 </div>
                 <a href="#" className="text-fuchsia-700 hover:underline">Esqueci minha senha</a>
             </div>
-            <button type="submit" className="bg-fuchsia-700 text-white rounded-lg p-4 w-full focus:outline-none focus:border-fuchsia-700">Login</button>
+            <button style={{ background: "linear-gradient(to right, #8338ec, #ff006e)" }} type="submit" className="text-white rounded-lg p-4 w-full focus:outline-none focus:border-fuchsia-700">Login</button>
             <p className="text-center text-gray-500 mt-2">Não tem uma conta? <a href="#" className="text-fuchsia-700 hover:underline">Registre-se</a></p>
         </form>
     );
