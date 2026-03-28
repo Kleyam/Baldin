@@ -21,17 +21,17 @@ export default function CadastroPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 transition-colors duration-300 bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
-      <button 
-  type="button"
-  onClick={() => setTheme((prev) => (prev === "dark" ? "light" : "dark"))}
-  className="absolute top-5 right-5 p-3 rounded-full shadow-md hover:scale-110 transition-transform bg-white dark:bg-zinc-800 z-50 border border-zinc-200 dark:border-zinc-700"
->
-  {theme === "dark" ? (
-    <Sun className="h-6 w-6 text-yellow-400" />
-  ) : (
-    <Moon className="h-6 w-6 text-violet-600" />
-  )}
-</button>
+      <button
+        type="button"
+        onClick={() => setTheme((prev) => (prev === "dark" ? "light" : "dark"))}
+        className="absolute top-5 right-5 p-3 rounded-full shadow-md hover:scale-110 transition-transform bg-white dark:bg-zinc-800 z-50 border border-zinc-200 dark:border-zinc-700"
+      >
+        {theme === "dark" ? (
+          <Sun className="h-6 w-6 text-yellow-400" />
+        ) : (
+          <Moon className="h-6 w-6 text-violet-600" />
+        )}
+      </button>
       <div className="w-full max-w-md md:max-w-lg rounded-xl shadow-2xl p-6 md:p-10 border transition-colors duration-300 bg-white border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800">
         <div className="text-center mb-8 md:mb-10">
           <div className="flex justify-center mb-4">
@@ -91,11 +91,11 @@ export default function CadastroPage() {
             Confirmar Cadastro
           </button>
 
-         <p className="text-center text-sm mt-4 text-zinc-600 dark:text-zinc-500">
-         Já tem acesso?{" "}
-         <Link href="/login" className="hover:underline text-violet-500 dark:text-violet-400">
-         Entrar no Painel
-        </Link>
+          <p className="text-center text-sm mt-4 text-zinc-600 dark:text-zinc-500">
+            Já tem acesso?{" "}
+            <Link href="/login" className="hover:underline text-violet-500 dark:text-violet-400">
+              Entrar no Painel
+            </Link>
           </p>
         </form>
       </div>
