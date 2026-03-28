@@ -1,15 +1,23 @@
 "use client";
+import EmailSVGComponent from "./svg/emailSVGComponent";
+import SenhaSVGComponent from "./svg/senhaSVGComponent";
 
 function FormLogin() {
     return (
         <form className="flex flex-col gap-4 mt-4 w-[80%] mx-auto">
             <div className="flex flex-col gap-2 mb-2">
                 <label htmlFor="email">Email</label>
-                <input type="text" placeholder="Email" className="border border-gray-600 rounded-lg p-3 w-full focus:outline-none focus:border-fuchsia-700" />
+                <div className="flex items-center flex-row gap-2 border border-gray-600 rounded-lg p-3 focus:border-fuchsia-700 focus:outline-none focus:border-2">
+                    <EmailSVGComponent />
+                    <input type="email" placeholder="Email" className="w-full focus:outline-none focus:border-fuchsia-700" />
+                </div>
             </div>
             <div className="flex flex-col gap-2 mb-2">
                 <label htmlFor="password">Senha</label>
-                <input type="password" placeholder="Senha" className="border border-gray-600 rounded-lg p-3 w-full focus:outline-none focus:border-fuchsia-700" />
+                <div className="flex items-center flex-row gap-2 border border-gray-600 rounded-lg p-3 focus:border-fuchsia-700 focus:outline-none focus:border-2">
+                    <SenhaSVGComponent />
+                    <input type="password" placeholder="Senha" className="w-full focus:outline-none focus:border-fuchsia-700" />
+                </div>
             </div>
             <div className="flex flex-row gap-2 mb-2 justify-between">
                 <div className="flex flex-row gap-2">
