@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { CadastroFormData, LoginFormData } from "./form";
 
 export const cadastroSchema = z.object({
   nome: z
@@ -23,9 +22,6 @@ export const cadastroSchema = z.object({
 });
 
 export type CadastroForm = z.infer<typeof cadastroSchema>;
-
-const _contractCheck: CadastroFormData = {} as CadastroForm;
-
 export const loginSchema = z.object({
   email: z
     .string()

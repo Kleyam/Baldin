@@ -3,8 +3,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { cadastroSchema, CadastroForm } from '@/types/auth';
 import { authService } from '@/services/authService';
 import { useState } from 'react';
+import { isAxiosError } from 'axios';
 
-export function useRegisterForm() {
+interface UseRegisterFormProps {
+  onSuccess?: (nome: string) => void;
+}
+
+export function useRegisterForm({ onSuccess }: UseRegisterFormProps = {}) {
   const [isLoading, setIsLoading] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
 
@@ -24,11 +29,16 @@ export function useRegisterForm() {
         cargo: data.cargo,
       });
 
-      alert(`Bem-vindo à Baldin Tech, ${data.nome}!`);
+      if (onSuccess) {
+        onSuccess(data.nome);
+      } else {
+        alert(`Bem-vindo à Baldin Tech, ${data.nome}!`);
+      }
     } catch (error: unknown) {
-      const err = error as { response?: { data?: { detail?: string } } };
-      const msg =
-        err?.response?.data?.detail || 'Erro ao cadastrar. Tente novamente.';
+      let msg = 'Erro ao cadastrar. Tente novamente.';
+      if (isAxiosError(error) && error.response?.data?.detail) {
+        msg = error.response.data.detail;
+      }
       setServerError(msg);
     } finally {
       setIsLoading(false);

@@ -3,11 +3,14 @@
 import Link from "next/link";
 import { User, Mail, Lock, Code2, Rocket } from "lucide-react";
 import { useRegisterForm } from "@/hooks/useRegisterForm";
+import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export default function CadastroPage() {
+  const router = useRouter();
+  
   const {
     register,
     handleSubmit,
@@ -15,7 +18,11 @@ export default function CadastroPage() {
     aoSalvar,
     isLoading,
     serverError,
-  } = useRegisterForm();
+  } = useRegisterForm({
+    onSuccess: () => {
+      router.push("/login");
+    }
+  });
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 transition-colors duration-300 bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
