@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Mail, Lock, Rocket } from "lucide-react";
 import { useLoginForm } from "@/hooks/useLoginForm";
 import { Input } from "@/components/ui/Input";
@@ -67,7 +68,7 @@ export default function LoginPage() {
           </button>
 
           <p className="text-center text-sm mt-4 text-zinc-600 dark:text-zinc-500">
-            Ainda não tem acesso? <a href="/cadastro" className="hover:underline text-violet-500 dark:text-violet-400">Criar uma conta</a>
+            Ainda não tem acesso? <Link href="/cadastro" className="hover:underline text-violet-500 dark:text-violet-400">Criar uma conta</Link>
           </p>
         </form>
       </div>

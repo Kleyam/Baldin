@@ -4,8 +4,13 @@ import { loginSchema, LoginForm } from '@/types/auth';
 import { authService } from '@/services/authService';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { isAxiosError } from 'axios';
 
-export function useLoginForm() {
+interface UseLoginFormProps {
+  onSuccess?: () => void;
+}
+
+export function useLoginForm({ onSuccess }: UseLoginFormProps = {}) {
   const [isLoading, setIsLoading] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
   const router = useRouter();
@@ -24,11 +29,16 @@ export function useLoginForm() {
         password: data.senha,
       });
       
-      router.push('/');
+      if (onSuccess) {
+        onSuccess();
+      } else {
+        router.push('/');
+      }
     } catch (error: unknown) {
-      const err = error as { response?: { data?: { detail?: string } } };
-      const msg =
-        err?.response?.data?.detail || 'E-mail ou senha incorretos.';
+      let msg = 'E-mail ou senha incorretos.';
+      if (isAxiosError(error) && error.response?.data?.detail) {
+        msg = error.response.data.detail;
+      }
       setServerError(msg);
     } finally {
       setIsLoading(false);

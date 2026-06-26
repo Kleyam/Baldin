@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { User, Mail, Lock, Code2, Rocket } from "lucide-react";
 import { useRegisterForm } from "@/hooks/useRegisterForm";
 import { Input } from "@/components/ui/Input";
@@ -88,7 +89,7 @@ export default function CadastroPage() {
           </button>
 
           <p className="text-center text-sm mt-4 text-zinc-600 dark:text-zinc-500">
-            Já tem acesso? <a href="/login" className="hover:underline text-violet-500 dark:text-violet-400">Entrar no Painel</a>
+            Já tem acesso? <Link href="/login" className="hover:underline text-violet-500 dark:text-violet-400">Entrar no Painel</Link>
           </p>
         </form>
       </div>

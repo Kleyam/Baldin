@@ -40,4 +40,4 @@ export const loginSchema = z.object({
 
 export type LoginForm = z.infer<typeof loginSchema>;
 
-const _loginContractCheck: LoginFormData = {} as LoginForm;
+
