@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { CadastroFormData } from "./form";
 
 export const cadastroSchema = z.object({
   nome: z
@@ -23,5 +22,18 @@ export const cadastroSchema = z.object({
 });
 
 export type CadastroForm = z.infer<typeof cadastroSchema>;
+export const loginSchema = z.object({
+  email: z
+    .string()
+    .trim()
+    .toLowerCase()
+    .email({ message: "Insira um e-mail válido" }),
 
-const _contractCheck: CadastroFormData = {} as CadastroForm;
+  senha: z
+    .string()
+    .min(6, { message: "A senha deve ter no mínimo 6 caracteres" }),
+});
+
+export type LoginForm = z.infer<typeof loginSchema>;
+
+

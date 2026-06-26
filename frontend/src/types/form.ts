@@ -4,3 +4,8 @@ export interface CadastroFormData {
     cargo: string;
     senha: string;
 }
+
+export interface LoginFormData {
+    email: string;
+    senha: string;
+}

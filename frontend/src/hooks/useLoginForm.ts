@@ -1,41 +1,41 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { cadastroSchema, CadastroForm } from '@/types/auth';
+import { loginSchema, LoginForm } from '@/types/auth';
 import { authService } from '@/services/authService';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { isAxiosError } from 'axios';
 
-interface UseRegisterFormProps {
-  onSuccess?: (nome: string) => void;
+interface UseLoginFormProps {
+  onSuccess?: () => void;
 }
 
-export function useRegisterForm({ onSuccess }: UseRegisterFormProps = {}) {
+export function useLoginForm({ onSuccess }: UseLoginFormProps = {}) {
   const [isLoading, setIsLoading] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
+  const router = useRouter();
 
-  const form = useForm<CadastroForm>({
-    resolver: zodResolver(cadastroSchema),
+  const form = useForm<LoginForm>({
+    resolver: zodResolver(loginSchema),
   });
 
-  async function aoSalvar(data: CadastroForm) {
+  async function aoSalvar(data: LoginForm) {
     setIsLoading(true);
     setServerError(null);
 
     try {
-      await authService.register({
-        full_name: data.nome,
+      await authService.login({
         email: data.email,
         password: data.senha,
-        cargo: data.cargo,
       });
-
+      
       if (onSuccess) {
-        onSuccess(data.nome);
+        onSuccess();
       } else {
-        alert(`Bem-vindo à Baldin Tech, ${data.nome}!`);
+        router.push('/');
       }
     } catch (error: unknown) {
-      let msg = 'Erro ao cadastrar. Tente novamente.';
+      let msg = 'E-mail ou senha incorretos.';
       if (isAxiosError(error) && error.response?.data?.detail) {
         msg = error.response.data.detail;
       }

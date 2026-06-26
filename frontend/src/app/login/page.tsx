@@ -1,16 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { User, Mail, Lock, Code2, Rocket } from "lucide-react";
-import { useRegisterForm } from "@/hooks/useRegisterForm";
-import { useRouter } from "next/navigation";
+import { Mail, Lock, Rocket } from "lucide-react";
+import { useLoginForm } from "@/hooks/useLoginForm";
 import { Input } from "@/components/ui/Input";
-import { Select } from "@/components/ui/Select";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
-export default function CadastroPage() {
-  const router = useRouter();
-  
+export default function LoginPage() {
   const {
     register,
     handleSubmit,
@@ -18,11 +14,7 @@ export default function CadastroPage() {
     aoSalvar,
     isLoading,
     serverError,
-  } = useRegisterForm({
-    onSuccess: () => {
-      router.push("/login");
-    }
-  });
+  } = useLoginForm();
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 transition-colors duration-300 bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
@@ -35,21 +27,13 @@ export default function CadastroPage() {
               <Rocket className="h-7 w-7 md:h-8 md:w-8 text-white" />
             </div>
           </div>
-          <h1 className="text-2xl md:text-3xl font-bold tracking-tight">Junte-se ao Time</h1>
+          <h1 className="text-2xl md:text-3xl font-bold tracking-tight">Bem-vindo de volta</h1>
           <p className="mt-2 text-sm md:text-base text-zinc-500 dark:text-zinc-400">
-            Crie sua conta para acessar as reuniões.
+            Entre na sua conta para acessar as reuniões.
           </p>
         </div>
 
         <form onSubmit={handleSubmit(aoSalvar)} className="space-y-5 md:space-y-6">
-          <Input
-            label="Nome Completo"
-            icon={User}
-            placeholder="Seu nome"
-            registration={register("nome")}
-            error={errors.nome?.message}
-          />
-
           <Input
             label="E-mail Corporativo"
             icon={Mail}
@@ -58,18 +42,6 @@ export default function CadastroPage() {
             registration={register("email")}
             error={errors.email?.message}
           />
-
-          <Select
-            label="Função / Cargo"
-            icon={Code2}
-            registration={register("cargo")}
-            error={errors.cargo?.message}
-          >
-            <option value="">Selecione sua função...</option>
-            <option value="frontend">Desenvolvedor Frontend</option>
-            <option value="backend">Desenvolvedor Backend</option>
-            <option value="design">Designer</option>
-          </Select>
 
           <Input
             label="Senha de Acesso"
@@ -92,11 +64,11 @@ export default function CadastroPage() {
               dark:bg-violet-600 dark:hover:bg-violet-700 dark:shadow-violet-900/20
               disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100"
           >
-            {isLoading ? "Cadastrando..." : "Confirmar Cadastro"}
+            {isLoading ? "Entrando..." : "Entrar"}
           </button>
 
           <p className="text-center text-sm mt-4 text-zinc-600 dark:text-zinc-500">
-            Já tem acesso? <Link href="/login" className="hover:underline text-violet-500 dark:text-violet-400">Entrar no Painel</Link>
+            Ainda não tem acesso? <Link href="/cadastro" className="hover:underline text-violet-500 dark:text-violet-400">Criar uma conta</Link>
           </p>
         </form>
       </div>
