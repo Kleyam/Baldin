@@ -8,6 +8,7 @@ import {
   Header,
   Hero,
   JourneySection,
+  OriginSection,
   Ticker,
 } from "./components";
 
@@ -21,6 +22,7 @@ export default function BaldinPage() {
         <FeaturesSection />
         <EvolutionSection />
         <CommunitySection />
+        <OriginSection />
         <JourneySection />
         <FaqSection />
         <CallToAction />

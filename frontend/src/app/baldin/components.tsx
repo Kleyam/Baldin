@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ArrowRight, ArrowUpRight, BrainCircuit, CheckCircle2, Compass, Menu, MoveUpRight, Plus, Quote, Radar, Rocket, Sparkles, UsersRound, X } from "lucide-react";
-import { communityPoints, faqs, features, journeySteps, navigation, pulseItems } from "./data";
+import { communityPoints, faqs, features, journeySteps, navigation, pulseItems, urlComunidadeBaldin } from "./data";
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -10,9 +10,9 @@ export function Header() {
   return (
     <header className="baldin-header">
       <nav className="baldin-container nav-content" aria-label="Navegação principal">
-        <a href="#inicio" className="brand" aria-label="Baldin, início"><span className="brand-mark"><Rocket size={19} /></span><span>Baldin</span></a>
+        <a href="#inicio" className="brand" aria-label="Baldin, início"><span className="brand-mark"><img src="/baldinIcon.png" alt="Ícone da Baldin" className="brand-icon w-full h-full" /></span><span>Baldin</span></a>
         <div className="desktop-nav">{navigation.map(([label, href]) => <a key={href} href={href}>{label}</a>)}</div>
-        <div className="nav-actions"><a href="#jornada" className="button button-small hide-mobile">Começar agora <ArrowUpRight size={16} /></a><button className="icon-button mobile-only" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen}>{menuOpen ? <X size={20} /> : <Menu size={20} />}</button></div>
+        <div className="nav-actions"><a href="/cadastro" className="button button-small hide-mobile">Começar agora <ArrowUpRight size={16} /></a><button className="icon-button mobile-only" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen}>{menuOpen ? <X size={20} /> : <Menu size={20} />}</button></div>
       </nav>
       {menuOpen && <div className="mobile-nav">{navigation.map(([label, href]) => <a key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</a>)}</div>}
     </header>
@@ -21,7 +21,7 @@ export function Header() {
 
 export function Hero() {
   return <section id="inicio" className="hero-section"><div className="grid-atmosphere" /><div className="baldin-container hero-grid">
-    <div className="hero-copy reveal"><p className="eyebrow">A próxima fase da sua jornada</p><h1>Sua vida <span>tech</span> em um só lugar.</h1><p className="hero-description">Aprenda no seu ritmo, encontre sua comunidade e transforme curiosidade em movimento. A Baldin reúne tudo que você precisa para evoluir na tecnologia.</p><div className="hero-actions"><a href="#jornada" className="button">Entrar na comunidade <ArrowRight size={17} /></a><a href="#mapa" className="button button-ghost">Explorar a Baldin <Compass size={17} /></a></div><div className="hero-proof"><span className="signal-dot" /><span>Uma comunidade em movimento</span><div className="avatar-stack"><i /><i /><i /><b>+</b></div></div></div>
+    <div className="hero-copy reveal"><p className="eyebrow">A próxima fase da sua jornada</p><h1>Sua vida <span>tech</span> em um só lugar.</h1><p className="hero-description">Aprenda no seu ritmo, encontre sua comunidade e transforme curiosidade em movimento. A Baldin reúne tudo que você precisa para evoluir na tecnologia.</p><div className="hero-actions"><a href={urlComunidadeBaldin} className="button">Entrar na comunidade <ArrowRight size={17} /></a><a href="#mapa" className="button button-ghost">Explorar a Baldin <Compass size={17} /></a></div><div className="hero-proof"><span className="signal-dot" /><span>Uma comunidade em movimento</span><div className="avatar-stack"><i /><i /><i /><b>+</b></div></div></div>
     <div className="profile-window reveal-delay"><div className="window-bar"><span><i /><i /><i /></span><code>baldin.profile</code></div><div className="profile-image"><div className="profile-overlay" /><div className="profile-card"><p className="eyebrow">Seu próximo capítulo</p><strong>Aprender. Criar. Conectar.</strong><div className="progress"><span /></div><small>72% de uma jornada que está só começando</small></div></div></div>
   </div></section>;
 }
@@ -46,6 +46,10 @@ export function CommunitySection() {
   return <section id="comunidade" className="baldin-section section-bottom"><div className="baldin-container community"><div className="community-visual"><div className="visual-label"><p className="eyebrow">Gente que faz acontecer</p><strong>Ideias ganham força quando encontram outras ideias.</strong></div></div><div className="community-copy"><p className="eyebrow">Mais que conteúdo</p><h2>Um lugar para <span>pertencer</span> enquanto você cresce.</h2><p className="large-copy">Aqui, cada pergunta pode abrir uma porta. Cada projeto pode aproximar pessoas. E cada pequeno avanço merece ser reconhecido.</p>{communityPoints.map(point => <p className="check-line" key={point}><CheckCircle2 size={18} />{point}</p>)}</div></div></section>;
 }
 
+export function OriginSection() {
+  return <section id="historia" className="baldin-section section-bottom"><div className="baldin-container origin"><div className="origin-intro"><div className="origin-mark"><Rocket size={24} /></div><p className="eyebrow">De onde viemos</p><h2>Baldin <span>Comunidade.</span></h2><p className="large-copy">A Baldin nasceu a partir de uma comunidade criada no <strong>WhatsApp pela influenciadora Leticia Baldin</strong>, que reuniu pessoas interessadas em tecnologia, aprendizado e desenvolvimento profissional.</p><p className="origin-detail">Hoje, a comunidade já conta com mais de <strong>500 membros ativos</strong> em plataformas como WhatsApp e Discord, conectados pelo desejo de aprender, compartilhar conhecimento e crescer juntos.</p></div><div className="origin-story"><div className="origin-step"><span>01</span><div><strong>Uma comunidade que cresceu</strong><p>Com o crescimento da comunidade, surgiu a necessidade de ir além das conversas e interações proporcionadas pelo WhatsApp.</p></div></div><div className="origin-step"><span>02</span><div><strong>Uma plataforma feita em conjunto</strong><p>A proposta é criar uma plataforma web centralizada e exclusiva para a comunidade, desenvolvida pela comunidade e para a comunidade.</p></div></div><div className="origin-step"><span>03</span><div><strong>Um ecossistema em movimento</strong><p>Desafios técnicos, feed, eventos e notícias ajudam a desenvolver habilidades, construir networking e acompanhar oportunidades relevantes do mercado.</p></div></div><p className="origin-conclusion">O Baldin mantém sua origem comunitária e amplia seu propósito: <strong>ser o principal ponto de encontro para conexão, desenvolvimento e oportunidades em tecnologia.</strong></p></div></div></section>;
+}
+
 export function JourneySection() {
   return <section id="jornada" className="baldin-section section-bottom"><div className="baldin-container"><SectionHeading eyebrow="Comece de onde estiver" title={<>Uma jornada com espaço para <span>você.</span></>} description="Não existe um jeito único de evoluir. Existe o próximo passo que faz sentido para você." /><div className="steps-grid">{journeySteps.map(([number, title, text]) => <article key={number}><small>{number}</small><h3>{title}</h3><p>{text}</p></article>)}</div><div className="quotes-grid"><blockquote><Quote size={22} /><p>“A tecnologia ficou menos solitária quando encontrei pessoas com o mesmo brilho nos olhos.”</p><footer>Marina, produto e dados</footer></blockquote><blockquote><Quote size={22} /><p>“A Baldin me deu clareza para transformar o que eu estudava em algo que eu queria construir.”</p><footer>Caio, desenvolvimento</footer></blockquote></div></div></section>;
 }
@@ -59,5 +63,5 @@ export function CallToAction() {
 }
 
 export function Footer() {
-  return <footer className="baldin-footer"><div className="baldin-container footer-content"><div className="brand"><span className="brand-mark"><Rocket size={19} /></span><span>Baldin</span></div><p>Uma comunidade para quem quer construir o próximo capítulo da tecnologia.</p><div className="footer-links">{navigation.map(([label, href]) => <a key={href} href={href}>{label}</a>)}</div><small>© 2026 Baldin. Feito para quem está em movimento.</small></div></footer>;
+  return <footer className="baldin-footer"><div className="baldin-container footer-content"><div className="brand"><span className="brand-mark"><img src="/baldinIcon.png" alt="Ícone da Baldin" className="brand-icon w-full h-full" /></span><span>Baldin</span></div><p>Uma comunidade para quem quer construir o próximo capítulo da tecnologia.</p><div className="footer-links">{navigation.map(([label, href]) => <a key={href} href={href}>{label}</a>)}</div><small>© 2026 Baldin. Feito para quem está em movimento.</small></div></footer>;
 }
