@@ -12,6 +12,7 @@ export const navigation: [string, string][] = [
   ["Recursos", "#recursos"],
   ["Mapa de evolução", "#mapa"],
   ["Comunidade", "#comunidade"],
+  ["Nossa história", "#historia"],
   ["FAQ", "#faq"],
 ] as const;
 

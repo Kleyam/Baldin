@@ -597,6 +597,91 @@ blockquote {
     justify-content: center;
 }
 
+.origin {
+    display: grid;
+    grid-template-columns: .85fr 1.15fr;
+    gap: 70px;
+    align-items: start;
+    padding: 50px;
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    background: linear-gradient(135deg, rgba(167, 139, 250, .1), rgba(255, 255, 255, .025) 45%, rgba(103, 232, 249, .06));
+}
+
+.origin-mark {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 28px;
+    border: 1px solid rgba(167, 139, 250, .38);
+    border-radius: 13px;
+    color: var(--violet);
+    background: rgba(167, 139, 250, .12);
+}
+
+.origin-intro h2 {
+    max-width: 480px;
+}
+
+.origin-intro .large-copy {
+    margin-top: 28px;
+}
+
+.origin-detail {
+    margin: 18px 0 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.origin-intro strong,
+.origin-step strong,
+.origin-conclusion strong {
+    color: #f4f4f5;
+}
+
+.origin-story {
+    padding-left: 32px;
+    border-left: 1px solid var(--line);
+}
+
+.origin-step {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    gap: 18px;
+    padding-bottom: 27px;
+}
+
+.origin-step:not(:last-child) {
+    margin-bottom: 27px;
+    border-bottom: 1px solid var(--line);
+}
+
+.origin-step > span {
+    color: var(--violet);
+    font: 12px "Space Mono", monospace;
+}
+
+.origin-step strong {
+    display: block;
+    margin-bottom: 9px;
+    font-size: 18px;
+}
+
+.origin-step p,
+.origin-conclusion {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.origin-conclusion {
+    padding-top: 4px;
+    color: #d4d4d8;
+}
+
 .check-line {
     display: flex;
     align-items: center;
@@ -818,7 +903,8 @@ summary:focus-visible {
 
     .hero-grid,
     .evolution,
-    .community {
+    .community,
+    .origin {
         grid-template-columns: 1fr;
         gap: 45px;
     }
@@ -850,6 +936,13 @@ summary:focus-visible {
 
     .community-visual {
         min-height: 350px;
+    }
+
+    .origin-story {
+        padding-left: 0;
+        border-top: 1px solid var(--line);
+        border-left: 0;
+        padding-top: 32px;
     }
 
     .footer-content {
@@ -907,8 +1000,13 @@ summary:focus-visible {
 
     .evolution-main,
     .community-copy,
-    .pulse-panel {
+    .pulse-panel,
+    .origin {
         padding: 30px 22px;
+    }
+
+    .origin {
+        gap: 35px;
     }
 
     .stats-grid {
