@@ -156,6 +156,14 @@ button {
     line-height: 1.65;
 }
 
+.login-panel {
+    align-self: center;
+}
+
+.login-intro .cadastro-intro-copy {
+    max-width: 620px;
+}
+
 .cadastro-form {
     display: grid;
     gap: 20px;
